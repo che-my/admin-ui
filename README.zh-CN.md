@@ -162,3 +162,14 @@ class: 'custom-class'
 
 | [<img src="https://avatars.githubusercontent.com/u/73626725?v=4" width="75px;"/><br/>eeeeelle<br/> <sub>:writing_hand: 发布脚本</sub>](https://github.com/eeeeelle) |
 | :---: |
+
+
+```json
+"prepare": "husky install"
+"prepare": "husky install"
+  "lint-staged": {
+    "**/*.{js,ts,vue}": [
+      "eslint --fix"
+    ]
+  },
+```

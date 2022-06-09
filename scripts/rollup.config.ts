@@ -6,6 +6,7 @@ import alias from '@rollup/plugin-alias'
 import esbuild from 'rollup-plugin-esbuild'
 import replace from '@rollup/plugin-replace'
 
+
 const outPubOptions = {
   globals: {
     vue: 'Vue',

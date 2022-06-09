@@ -29,7 +29,7 @@ export default defineConfig({
         '*/demo/demo[0-9].vue',
       ],
       extensions: ['vue'],
-    }),
+    })
   ],
   resolve: {
     alias: {

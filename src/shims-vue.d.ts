@@ -26,3 +26,5 @@ declare module '@docsearch/css' {
   const css: string
   export default css
 }
+
+

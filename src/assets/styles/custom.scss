@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --el-menu-item-height: 45px !important;
+}
+.sidebar-container{
+    .router-link-active{
+        border-right: 2px solid #0a0a0a;
+    }
+}
+[data-mode="mobile"] {
+    .el-dialog{
+        --el-dialog-width:100vw !important;
+    }
+}
+.el-drawer{
+    --el-drawer-padding-primary: var(--el-dialog-padding-primary, 14px) !important;
+}
+.el-button--primary:hover{
+    --el-button-hover-bg-color: var(--el-color-primary-dark-2) !important;
+}
+.el-button--success:hover{
+    --el-button-hover-bg-color: var(--el-color-success-dark-2) !important;
+}
+.el-button--info:hover{
+    --el-button-hover-bg-color: var(--el-color-info-dark-2) !important;
+}
+.el-button--warning:hover{
+    --el-button-hover-bg-color: var(--el-color-warning-dark-2) !important;
+}
+.el-button--danger:hover{
+    --el-button-hover-bg-color: var(--el-color-danger-dark-2) !important;
+}
+.layout-main{
+    position: relative;
+    box-sizing: border-box;
+}
+.iframe{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+.el-tabs--left {
+    .el-tabs__header {
+        .el-tabs__nav{
+            .el-tabs__active-bar {
+                z-index: 0;
+                width: 100%;
+                background-color: #e1f0ff;
+                border-right: 2px solid #409eff;
+            }
+            .el-tabs__item {
+                text-align: left;
+                padding: 0 30px;
+            }
+        }
+    }
+    .el-tab-pane {
+        padding: 0 20px 0 30px;
+    }
+}
+.el-drawer__header {
+    margin-bottom: initial !important;
+    padding-bottom: 15px !important;
+    border-bottom: 1px solid #ddd;
+}

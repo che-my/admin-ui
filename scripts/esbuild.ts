@@ -6,6 +6,7 @@ import ora from 'ora'
 import klawSync from 'klaw-sync'
 import { parse, init } from 'es-module-lexer'
 import vue from 'unplugin-vue/esbuild'
+import plugins from "./vite-plugins";
 
 const PACKAGES_PATH = path.resolve(
   __dirname,
@@ -34,6 +35,7 @@ async function run(options?: BuildOptions) {
           // },
         },
       }),
+      ...plugins
     ],
     loader: { '.png': 'dataurl' },
     external: [
