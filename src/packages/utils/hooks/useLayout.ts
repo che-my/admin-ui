@@ -1,18 +1,24 @@
-import { computed, onMounted, onUnmounted } from 'vue'
-import { watchTheme, watchMode, watchTitle, watchMenuMode } from './useWatch'
-import useLang from './useLang'
+import { onMounted, onUnmounted, provide } from 'vue'
+import { watchTheme, watchMode, watchTitle, watchMenuMode, watchSubMenuCollapse } from './useWatch'
 import { sidebarComputed } from './useComputed'
 import { useStore } from "my-lib/utils/store";
+import { refreshF5HotKeys, reload } from "my-lib/utils/hooks";
+import useLang from './useLang'
 
-export default function useLayout() {
+export function useLayout() {
+    const { menu } = useStore()
+    provide('reload', reload)
+    provide('switchMenu', menu.switchMenu)
+
     const { settingsState, setMode } = useStore().settings
-
     const { mainSidebarActualWidth, subSidebarActualWidth } = sidebarComputed()
 
     watchTitle()
     watchTheme()
     watchMode()
     watchMenuMode()
+    watchSubMenuCollapse()
+    refreshF5HotKeys()
 
     const lang = useLang()
     const resize = () => {

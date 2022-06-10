@@ -65,6 +65,7 @@ const globalSettings = {
     },
     // 显示模式，支持：mobile、pc
     mode: 'pc',
-    title: '后台管理系统'
+    title: '后台管理系统',
+    logo: ""
 }
 export default globalSettings

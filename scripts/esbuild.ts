@@ -6,7 +6,8 @@ import ora from 'ora'
 import klawSync from 'klaw-sync'
 import { parse, init } from 'es-module-lexer'
 import vue from 'unplugin-vue/esbuild'
-import plugins from "./vite-plugins";
+// import plugins from "./vite-plugins";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
 const PACKAGES_PATH = path.resolve(
   __dirname,
@@ -35,7 +36,11 @@ async function run(options?: BuildOptions) {
           // },
         },
       }),
-      ...plugins
+      // createSvgIconsPlugin({
+      //   iconDirs: [`${cwd()}src/assets/icons/`],
+      //   symbolId: 'icon-[dir]-[name]',
+      //   svgoOptions: true,
+      // })
     ],
     loader: { '.png': 'dataurl' },
     external: [
@@ -44,6 +49,7 @@ async function run(options?: BuildOptions) {
       '@vue/*',
       '@better-scroll/*',
       'jpeg-js',
+      'element-plus'
     ],
     format: 'esm',
     minify: false,

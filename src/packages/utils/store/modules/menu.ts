@@ -1,6 +1,8 @@
 import { deepClone, resolveRoutePath } from 'my-lib/utils/utils'
 import { reactive } from 'vue'
 import { useStore } from 'my-lib/utils/store'
+import { eventMitt } from "my-lib/utils";
+import { mitts } from "my-lib/utils/hooks";
 
 // @ts-ignore
 function getDeepestPath(routes, rootPath = '') {
@@ -111,6 +113,14 @@ const menu = {
                     menu.menuState.actived = index
                 }
             })
+        }
+    },
+    switchMenu(index:number){
+        const { settingsState } = useStore().settings
+        this.setActived(index)
+        if (settingsState.menus.switchMainMenuAndPageJump) {
+            const path = this.sidebarMenusFirstDeepestPath()
+            eventMitt.emit(mitts.switchMenu, path)
         }
     }
 }

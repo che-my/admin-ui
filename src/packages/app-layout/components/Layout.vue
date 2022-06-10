@@ -1,41 +1,17 @@
 <script setup lang="ts">
-import Header from './components/Header/index.vue'
-import MainSidebar from './components/MainSidebar/index.vue'
-import SubSidebar from './components/SubSidebar/index.vue'
-import Topbar from './components/Topbar/index.vue'
-import Search from './components/Search/index.vue'
-import AppSetting from './components/AppSetting/index.vue'
-import Copyright from '@/components/Copyright/index.vue'
-import { mitts } from '../../utils/hooks/useGlobalMitt'
-import { useShow } from "my-lib/utils/hooks/useShow";
-import { watchSubMenuCollapse } from "my-lib/utils/hooks/useWatch";
-import { useStore } from "my-lib/utils/store";
-import { onMounted, provide, watch } from "vue";
-
+import Header from 'my-lib/app-layout/components/Header/index.vue'
+import MainSidebar from 'my-lib/app-layout/components/MainSidebar/index.vue'
+import SubSidebar from 'my-lib/app-layout/components/SubSidebar/index.vue'
+import Topbar from 'my-lib/app-layout/components/Topbar/index.vue'
+import Search from 'my-lib/app-layout/components/Search/index.vue'
+import AppSetting from 'my-lib/app-layout/components/AppSetting/index.vue'
+import Copyright from 'my-lib/copyright/index.vue'
+import { useShow } from 'my-lib/utils/hooks'
+import { useStore } from "my-lib/utils/store"
 const { menu, settings } = useStore()
 const { settingsState, toggleSidebarCollapse } = settings
 const { showSidebar, showCopyright, showTopbar } = useShow()
-watchSubMenuCollapse()
-onMounted(() => {
-    window.$hotkeys('f5', e => {
-        if (settingsState.topbar.enablePageReload) {
-            e.preventDefault()
-            reload()
-        }
-    })
-})
-function reload() {
-    window.$mitt.emit(mitts.reload)
-}
-function switchMenu(index:number) {
-    menu.setActived(index)
-    if (settingsState.menu.switchMainMenuAndPageJump) {
-        const path = menu.sidebarMenusFirstDeepestPath()
-        window.$mitt.emit(mitts.switchMenu, path)
-    }
-}
-provide('reload', reload)
-provide('switchMenu', switchMenu)
+
 </script>
 
 <template>

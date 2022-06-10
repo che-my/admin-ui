@@ -1,5 +1,4 @@
 import settings from './modules/settings'
-import keepAlive from './modules/keepAlive'
 import route from './modules/route'
 import menu from './modules/menu'
 import user from './modules/user'
@@ -84,7 +83,6 @@ export declare type settingType = {
 export declare type stateProp = {
     settings: typeof settings
     menu: typeof menu
-    keepAlive: typeof keepAlive,
     route: typeof route
     user: typeof user
 }

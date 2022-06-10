@@ -4,8 +4,7 @@ import { ref, computed, onUnmounted, onMounted } from 'vue'
 import { compile } from 'path-to-regexp'
 import Tools from '../Tools/index.vue'
 import { useStore } from 'my-lib/utils/store'
-import { useInjectRoute } from 'my-lib/utils/hooks/useRoute'
-import {topBarComputed} from "my-lib/utils/hooks/useComputed";
+import { useInjectRoute, topBarComputed } from 'my-lib/utils/hooks'
 const route = useInjectRoute()
 const { settings } = useStore()
 const { settingsState, toggleSidebarCollapse } = settings

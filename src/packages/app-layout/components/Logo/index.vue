@@ -1,6 +1,5 @@
 <script setup name="Logo" lang="ts">
-import { ref, computed, getCurrentInstance } from 'vue'
-import imgLogo from '@/assets/images/logo.png'
+import { computed } from 'vue'
 import { useStore } from 'my-lib/utils/store'
 defineProps({
     showLogo: {
@@ -13,11 +12,6 @@ defineProps({
     }
 })
 const { settingsState } = useStore().settings
-const title = ref(settingsState.title)
-const logo = ref(imgLogo)
-
-console.log(getCurrentInstance())
-
 const to = computed(() => {
     let rtn:any = {}
     if (settingsState.dashboard.enable) {
@@ -28,9 +22,9 @@ const to = computed(() => {
 </script>
 
 <template>
-  <router-link :to="to" class="title" :class="{'is-link': settingsState.dashboard.enable}" :title="title">
-    <img v-if="showLogo" :src="logo" class="logo">
-    <span v-if="showTitle">{{ title }}</span>
+  <router-link :to="to" class="title" :class="{'is-link': settingsState.dashboard.enable}" :title="settingsState.title">
+    <img v-if="showLogo&&settingsState.logo" :src="settingsState.logo" class="logo">
+    <span v-if="showTitle">{{ settingsState.title }}</span>
   </router-link>
 </template>
 

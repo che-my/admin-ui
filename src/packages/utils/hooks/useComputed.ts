@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { useStore } from "my-lib/utils/store";
 import { deepClone } from "my-lib/utils/utils";
-import {useInjectRoute} from "my-lib/utils/hooks/useRoute";
+import { useInjectRoute } from "my-lib/utils/hooks";
 
 export function sidebarComputed() {
     const { settingsState } = useStore().settings

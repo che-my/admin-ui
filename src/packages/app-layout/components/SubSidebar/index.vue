@@ -3,13 +3,13 @@ import { computed, ref } from 'vue'
 import Logo from '../Logo/index.vue'
 import SidebarItem from '../SidebarItem/index.vue'
 import { useStore } from 'my-lib/utils/store'
-import { useInjectRoute } from 'my-lib/utils/hooks/useRoute'
+import { useInjectRoute } from 'my-lib/utils/hooks'
 const { settings, menu } = useStore()
 const settingsState = computed(() => settings.settingsState)
 const menus:any = computed(() => menu.sidebarMenus())
 const sidebarScrollTop = ref(0)
 const route = useInjectRoute()
-function onSidebarScroll(e) {
+function onSidebarScroll(e:any) {
     sidebarScrollTop.value = e.target.scrollTop
 }
 </script>

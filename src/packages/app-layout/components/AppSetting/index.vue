@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useStore } from 'my-lib/store'
-import { mitts } from 'my-lib/hooks/useGlobalMitt'
 import SvgIcon from 'my-lib/svg-icon/index.vue'
+import { ref, onMounted } from 'vue'
+import { useStore } from 'my-lib/utils/store'
+import { mitts } from 'my-lib/utils/hooks'
+import { eventMitt } from "my-lib/utils";
 const { settings } = useStore()
 const { settingsState } = settings
 const isShow = ref(false)
 
 const handleSave = () => {
-    window.$mitt.emit(mitts.saveSettings, settingsState)
+  eventMitt.emit(mitts.saveSettings, settingsState)
 }
 onMounted(() => {
-    window.$mitt.on('global-theme-toggle', () => {
-        isShow.value = !isShow.value
-    })
+  eventMitt.on('global-theme-toggle', () => {
+      isShow.value = !isShow.value
+  })
 })
 
 </script>

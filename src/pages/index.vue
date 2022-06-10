@@ -1,4 +1,8 @@
+<script setup lang="ts">
+import logo from '../assets/logo.png'
+
+</script>
+
 <template>
-  <h3>Home Page</h3>
-  <img alt="Vue logo" src="../assets/logo.png" />
+  <AppLayout :route="$route" :logo="logo"></AppLayout>
 </template>

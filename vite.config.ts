@@ -6,8 +6,17 @@ import Pages from 'vite-plugin-pages'
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import getScssResources from "./src/assets";
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: getScssResources().join('')
+      }
+    }
+  },
   build: {
     outDir: 'example',
   },
@@ -39,5 +48,5 @@ export default defineConfig({
           : `${path.resolve(__dirname, './dist/es')}/`,
       'dist/': `${path.resolve(__dirname, './dist/es')}/`,
     },
-  },
+  }
 })

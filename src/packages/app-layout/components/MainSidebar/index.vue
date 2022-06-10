@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import Logo from '../Logo/index.vue'
-import SvgIcon from '@/components/SvgIcon/index.vue'
+import Logo from 'my-lib/app-layout/components/Logo/index.vue'
+import SvgIcon from 'my-lib/svg-icon/index.vue'
 import { useStore } from 'my-lib/utils/store'
 const { settings, menu } = useStore()
 

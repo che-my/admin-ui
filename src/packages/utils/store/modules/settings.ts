@@ -27,6 +27,9 @@ const settings = {
     setTitle(title:string) {
         settings.settingsState.title = title
     },
+    setLogo(logo:string){
+        settings.settingsState.logo = logo
+    },
     // 切换侧边栏导航展开/收起
     toggleSidebarCollapse() {
         settings.settingsState.menu.subMenuCollapse = !settings.settingsState.menu.subMenuCollapse

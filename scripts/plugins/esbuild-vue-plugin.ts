@@ -9,6 +9,7 @@ import fs from 'fs'
 import path from 'path'
 import { Plugin } from 'esbuild'
 import * as compiler from '@vue/compiler-sfc'
+// @ts-ignore
 import hash from 'hash-sum'
 
 const removeQuery = (p: string) => p.replace(/\?.+$/, '')

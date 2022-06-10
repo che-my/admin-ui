@@ -1,26 +1,39 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { ElConfigProvider } from 'element-plus'
 import Layout from './components/Layout.vue'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
-import useGlobalMitt, { emitList } from 'my-lib/utils/hooks/useGlobalMitt'
-import useLayout from 'my-lib/utils/hooks/useLayout'
-import { useProvideRoute } from 'my-lib/utils/hooks/useRoute'
+import { emitList, useGlobalMitt, useLayout, useProvideRoute } from 'my-lib/utils/hooks'
+import { useStore } from "my-lib/utils/store";
 export default defineComponent({
   name: 'AppLayout',
   components:{
-    ElConfigProvider,Layout
+    Layout
   },
   props: {
     route: {
       type: Object as PropType<RouteLocationNormalizedLoaded>,
       default: () => {}
+    },
+    logo: {
+      type: String,
+      default: ""
+    },
+    user: {
+      type: Object,
+      default: ()=> {
+        return {
+          account: "",
+          avatar: "",
+        }
+      }
     }
   },
   emits: emitList,
   setup(props) {
     useGlobalMitt()
     useProvideRoute(props.route)
+    const { setLogo } = useStore().settings
+    setLogo(props.logo)
     return useLayout()
   },
 })

@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { watch, computed, ref, getCurrentInstance, onMounted } from 'vue'
-import { deepClone, isExternalLink } from '@/utils'
-import { useStore } from 'my-lib/utils/store'
 import SvgIcon from 'my-lib/svg-icon/index.vue'
+import { watch, computed, ref, getCurrentInstance, onMounted } from 'vue'
+import { deepClone, isExternalLink } from 'my-lib/utils'
+import { useStore } from 'my-lib/utils/store'
+import { eventMitt } from 'my-lib/utils'
+import { mitts } from "my-lib/utils/hooks";
+import hotkeys from "hotkeys-js";
 // @ts-ignore
 const { proxy } = getCurrentInstance()
 const { settings, route } = useStore()
@@ -41,17 +44,17 @@ watch(
                 body.classList.add('overflow-hidden')
                 proxy.$refs.search.scrollTop = 0
                 // 当搜索显示的时候绑定上、下、回车快捷键，隐藏的时候再解绑。另外当 input 处于 focus 状态时，采用 vue 来绑定键盘事件
-                window.$hotkeys('up', keyUp)
-                window.$hotkeys('down', keyDown)
-                window.$hotkeys('enter', keyEnter)
+                hotkeys('up', keyUp)
+                hotkeys('down', keyDown)
+                hotkeys('enter', keyEnter)
                 setTimeout(() => {
                     proxy.$refs.input.focus()
                 }, 500)
             } else {
                 body.classList.remove('overflow-hidden')
-                window.$hotkeys.unbind('up', keyUp)
-                window.$hotkeys.unbind('down', keyDown)
-                window.$hotkeys.unbind('enter', keyEnter)
+                hotkeys.unbind('up', keyUp)
+                hotkeys.unbind('down', keyDown)
+                hotkeys.unbind('enter', keyEnter)
                 setTimeout(() => {
                     searchInput.value = ''
                     actived.value = -1
@@ -69,20 +72,19 @@ watch(
 )
 
 onMounted(() => {
-    window.$mitt.on('global-search-toggle', () => {
+    eventMitt.on(mitts.searchToggle, () => {
         isShow.value = !isShow.value
     })
-    window.$hotkeys('alt+s', e => {
+    hotkeys('alt+s', e => {
         if (settingsState.topbar.enableNavSearch) {
             e.preventDefault()
             isShow.value = true
         }
     })
-    window.$hotkeys('esc', e => {
-        console.log(isShow.value && settingsState.topbar.enableNavSearch)
+    hotkeys('esc', e => {
         if (isShow.value && settingsState.topbar.enableNavSearch) {
             e.preventDefault()
-            window.$mitt.emit('global-search-toggle')
+            eventMitt.emit(mitts.searchToggle)
         }
     })
     routeState.routes.map(item => {
@@ -101,14 +103,14 @@ function hasChildren(item) {
     }
     return flag
 }
-function getSourceList(arr) {
-    arr.map(item => {
+function getSourceList(arr:any) {
+    arr.map((item:any) => {
         if (item.meta.sidebar !== false) {
             if (hasChildren(item)) {
                 let baseBreadcrumb = item.meta.baseBreadcrumb ? deepClone(item.meta.baseBreadcrumb) : []
                 baseBreadcrumb.push(item.meta.title)
                 let child = deepClone(item.children)
-                child.map(c => {
+                child.map((c:any) => {
                     c.meta.baseIcon = item.meta.icon || item.meta.baseIcon
                     c.meta.baseBreadcrumb = baseBreadcrumb
                     c.meta.basePath = item.meta.basePath
@@ -182,7 +184,7 @@ function handleScroll() {
 }
 
 const onKeydown = () => {
-    window.$mitt.emit('global-search-toggle')
+    eventMitt.emit('global-search-toggle')
 }
 
 const onClick = () => {

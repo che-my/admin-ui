@@ -3,7 +3,7 @@ import { computed, inject } from 'vue'
 import Logo from '../Logo/index.vue'
 import Tools from '../Tools/index.vue'
 import SvgIcon from 'my-lib/svg-icon/index.vue'
-import { useShow } from 'my-lib/utils/hooks/useShow'
+import { useShow } from 'my-lib/utils/hooks'
 import { useStore } from 'my-lib/utils/store'
 const { menu } = useStore()
 const switchMenu = inject('switchMenu')

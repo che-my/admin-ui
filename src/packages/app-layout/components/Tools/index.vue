@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SvgIcon from '@/components/SvgIcon/index.vue'
+import SvgIcon from 'my-lib/svg-icon/index.vue'
 import { inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'my-lib/utils/store'
@@ -9,21 +9,22 @@ const { settings, user } = useStore()
 const { settingsState, setColorScheme } = settings
 const { userState } = user
 import { useFullscreen } from '@vueuse/core'
-import { mitts } from 'my-lib/utils/hooks/useGlobalMitt'
+import { mitts } from 'my-lib/utils/hooks'
+import { eventMitt } from "my-lib/utils";
 const { isFullscreen, toggle } = useFullscreen()
 const userCommand = (command:string) => {
-    window.$mitt.emit(mitts.toolsCommand, command)
+    eventMitt.emit(mitts.toolsCommand, command)
 }
 const toggleScreen = () => {
     toggle()
 }
 
 const onSearchClick = () => {
-    window.$mitt.emit('global-search-toggle')
+    eventMitt.emit('global-search-toggle')
 }
 
 const onThemeClick = () => {
-    window.$mitt.emit('global-theme-toggle')
+    eventMitt.emit('global-theme-toggle')
 }
 
 </script>

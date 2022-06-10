@@ -8,4 +8,6 @@ export default {
 import AppLayout from 'my-lib/app-layout'
 </script>
 
-<template></template>
+<template>
+  <AppLayout></AppLayout>
+</template>

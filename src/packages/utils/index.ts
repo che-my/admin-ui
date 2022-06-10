@@ -1,3 +1,4 @@
+import mitt from 'mitt'
 /* istanbul ignore file */
 import { DefineComponent, defineComponent } from 'vue'
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -17,4 +18,7 @@ export const createDemoModule = (
     },
   })
 
+export const eventMitt = mitt()
+
+export * from "./utils/index"
 
